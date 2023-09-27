@@ -14,11 +14,21 @@
 // });
 
 $('#getJson').on('click', function(){
-    console.log('testing 123');
+    $('#wow').empty();
     $.getJSON('https://owen-wilson-wow-api.onrender.com/wows/random')
     .done(function(data){
         console.log(data);
-        console.log(data[0].character);
+        var newContent = '';
+        var title = data[0].movie;
+        var date = data[0].year;
+        var video = data[0].video['720p'];
+        var img = data[0].poster;
+        // var video = data[0].
+        newContent += `<h1>${title} (${date})</h1>`
+        newContent += `<video controls width="500"><source src="${video}" type="video/mp4" /></video>`;
+        newContent += `<br>`;
+        newContent += `<img src="${img}" class="contentImg"></img>`;
+        $('#wow').append(newContent);
     }).fail(function(){
         console.log('something failed');
     }).always(function(){
